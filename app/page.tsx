@@ -1,11 +1,15 @@
+import dynamic from "next/dynamic";
 import FashionSlider from "./components/FashionSlider";
 import Navbar from "./components/Navbar";
+import ClothesSection from "./components/ClothesSection"; // Using named import
+
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
       <FashionSlider />
+      <ClothesSection />
       <div className="max-w-7xl mx-auto px-8 py-16">
         <h1 className="text-4xl font-bold text-center mb-8">
           Welcome to Our Fashion Store
