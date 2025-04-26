@@ -18,28 +18,28 @@ interface ClothingItem {
 const clothingItems: ClothingItem[] = [
   {
     id: 1,
-    name: "Classic White Tee",
+    name: "Check Shirt",
     price: 29.99,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=1000",
+    image: "/assets/Shirt 2.png",
     category: "tops",
-    color: "White",
+    color: "brownish",
     isNew: true
   },
   {
     id: 2,
-    name: "Denim Jacket",
+    name: "Classic Shirt",
     price: 89.99,
-    image: "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?auto=format&fit=crop&q=80&w=1000",
+    image: "/assets/Shirt.png",
     category: "tops",
-    color: "Blue"
+    color: "Black"
   },
   {
     id: 3,
-    name: "Slim Fit Jeans",
+    name: "Full Sleeves ",
     price: 69.99,
-    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=1000",
-    category: "bottoms",
-    color: "Dark Blue"
+    image: "/assets/Full sleeves.png",
+    category: "tops",
+    color: "Grey"
   },
   {
     id: 4,
@@ -171,7 +171,7 @@ export default function ClothesSection() {
                   .filter(item => category === "all" || item.category === category)
                   .map(item => (
                     <Card key={item.id} className="overflow-hidden group bg-white hover:shadow-lg transition-all duration-300">
-                      <div className="relative aspect-[3/4]">
+                      <div className="relative aspect-[1]">
                         <img 
                           src={item.image} 
                           alt={item.name}
