@@ -21,7 +21,8 @@ const config: Config = {
       },
       fontFamily: {
         bourbon: ['"Bourbon Street"', 'cursive'],
-      },      
+        italian: ['Italiana', 'serif'],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

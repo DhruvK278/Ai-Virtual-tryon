@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import FashionSlider from "./components/FashionSlider";
 import Navbar from "./components/Navbar";
-import ClothesSection from "./components/ClothesSection"; // Using named import
+import ClothesSection from "./components/ClothesSection";
 
 
 export default function Home() {
