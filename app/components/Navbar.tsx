@@ -3,9 +3,11 @@
 import { Menu, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "@/app/context/CartContext";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
+  const { cartCount } = useCart();
 
   return (
     <nav className="flex justify-between items-center bg-black text-white px-8 py-4 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md bg-black/80">
@@ -42,8 +44,13 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-6">
-        <button className="text-white/80 hover:text-white transition-colors">
+        <button className="text-white/80 hover:text-white transition-colors relative">
           <ShoppingBag className="h-5 w-5" />
+          {cartCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-white text-black text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+              {cartCount}
+            </span>
+          )}
         </button>
       </div>
     </nav>

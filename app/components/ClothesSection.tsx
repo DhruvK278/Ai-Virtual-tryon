@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/app/context/CartContext";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { Heart, ShoppingCart } from "lucide-react";
@@ -10,18 +11,10 @@ import { clothingItems } from "@/lib/data";
 export default function ClothesSection() {
   const router = useRouter();
   const [favorites, setFavorites] = useState<number[]>([]);
-  const [cart, setCart] = useState<number[]>([]);
+  const { cartItems: cart, toggleCart } = useCart();
 
   const toggleFavorite = (id: number) => {
     setFavorites(prev =>
-      prev.includes(id)
-        ? prev.filter(itemId => itemId !== id)
-        : [...prev, id]
-    );
-  };
-
-  const toggleCart = (id: number) => {
-    setCart(prev =>
       prev.includes(id)
         ? prev.filter(itemId => itemId !== id)
         : [...prev, id]
@@ -78,19 +71,25 @@ export default function ClothesSection() {
                         )}
                         <div className="absolute top-4 right-4 flex gap-2">
                           <button
-                            onClick={() => toggleFavorite(item.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleFavorite(item.id);
+                            }}
                             className={`p-2 rounded-full ${favorites.includes(item.id)
-                                ? "bg-red-500 text-white"
-                                : "bg-white/80 text-gray-700"
+                              ? "bg-red-500 text-white"
+                              : "bg-white/80 text-gray-700"
                               } hover:scale-110 transition-all duration-300 shadow-md`}
                           >
                             <Heart className="w-5 h-5" />
                           </button>
                           <button
-                            onClick={() => toggleCart(item.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleCart(item.id);
+                            }}
                             className={`p-2 rounded-full ${cart.includes(item.id)
-                                ? "bg-black text-white"
-                                : "bg-white/80 text-gray-700"
+                              ? "bg-black text-white"
+                              : "bg-white/80 text-gray-700"
                               } hover:scale-110 transition-all duration-300 shadow-md`}
                           >
                             <ShoppingCart className="w-5 h-5" />

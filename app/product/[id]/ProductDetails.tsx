@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/app/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Camera, ShoppingCart, Heart, ArrowLeft } from "lucide-react";
@@ -32,12 +33,15 @@ interface Product {
 
 export default function ProductDetails({ product }: { product: Product }) {
   const router = useRouter();
+  const { cartItems, toggleCart } = useCart();
   const [selectedSize, setSelectedSize] = useState<string>("");
+
+  const isInCart = cartItems.includes(parseInt(product.id));
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 py-8">
         <button
           onClick={() => router.back()}
@@ -63,7 +67,7 @@ export default function ProductDetails({ product }: { product: Product }) {
               <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
               <p className="text-2xl font-semibold mb-6">${product.price}</p>
               <p className="text-gray-600 mb-6">{product.description}</p>
-              
+
               <div className="mb-8">
                 <h3 className="font-semibold mb-4">Color</h3>
                 <div className="flex gap-2">
@@ -81,13 +85,12 @@ export default function ProductDetails({ product }: { product: Product }) {
                       key={sizeOption.size}
                       onClick={() => setSelectedSize(sizeOption.size)}
                       disabled={!sizeOption.available}
-                      className={`py-3 border rounded-lg transition-all ${
-                        !sizeOption.available
-                          ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                          : selectedSize === sizeOption.size
+                      className={`py-3 border rounded-lg transition-all ${!sizeOption.available
+                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                        : selectedSize === sizeOption.size
                           ? "bg-black text-white"
                           : "hover:border-black"
-                      }`}
+                        }`}
                     >
                       {sizeOption.size}
                     </button>
@@ -105,11 +108,15 @@ export default function ProductDetails({ product }: { product: Product }) {
 
               <div className="grid grid-cols-2 gap-4">
                 <Button
-                  variant="outline"
-                  className="py-6 text-lg border-2 hover:bg-black hover:text-white transition-all"
+                  variant={isInCart ? "default" : "outline"}
+                  className={`py-6 text-lg border-2 transition-all ${isInCart
+                      ? "bg-black text-white hover:bg-gray-800"
+                      : "hover:bg-black hover:text-white"
+                    }`}
+                  onClick={() => toggleCart(parseInt(product.id))}
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
-                  Add to Cart
+                  {isInCart ? "Remove from Cart" : "Add to Cart"}
                 </Button>
                 <Button
                   className="py-6 text-lg bg-black hover:bg-gray-800 transition-all"
