@@ -33,7 +33,7 @@ export default function Navbar() {
       setSearchQuery("");
       setShowDropdown(false);
     } else {
-      
+
       if (recommendations.length > 0) {
         router.push(`/product/${recommendations[0].id}`);
         setSearchQuery("");
@@ -69,6 +69,12 @@ export default function Navbar() {
           className="text-white/80 hover:text-white no-underline uppercase tracking-[0.2em] font-italian text-sm transition-all duration-300 hover:scale-105"
         >
           About
+        </Link>
+        <Link
+          href="/help"
+          className="text-white/80 hover:text-white no-underline uppercase tracking-[0.2em] font-italian text-sm transition-all duration-300 hover:scale-105"
+        >
+          Help
         </Link>
         <Link
           href="/contact"
